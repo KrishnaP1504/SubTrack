@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardSubscription"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp"
+    app:cardBackgroundColor="?attr/colorSurface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/card_padding"
+        android:gravity="center_vertical">
+
+        <!-- Subscription Logo -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvLogoCard"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp"
+            app:cardBackgroundColor="#EEEEEE">
+
+            <ImageView
+                android:id="@+id/ivLogo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tvFallbackLetter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Name + renewal date -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="12dp">
+
+            <TextView
+                android:id="@+id/tvSubscriptionName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Netflix"
+                style="@style/TextAppearance.Material3.TitleMedium" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="2dp">
+
+                <TextView
+                    android:id="@+id/tvCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Entertainment"
+                    style="@style/TextAppearance.Material3.LabelSmall"
+                    android:textColor="?attr/colorOnSurfaceVariant" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  ·  "
+                    style="@style/TextAppearance.Material3.LabelSmall"
+                    android:textColor="?attr/colorOnSurfaceVariant" />
+
+                <TextView
+                    android:id="@+id/tvRenewalDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Renews Jun 1"
+                    style="@style/TextAppearance.Material3.LabelSmall"
+                    android:textColor="?attr/colorOnSurfaceVariant" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Price + cycle badge -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$14.99"
+                style="@style/TextAppearance.Material3.TitleMedium"
+                android:textColor="?attr/colorPrimary" />
+
+            <!-- Billing cycle chip (Monthly / Yearly) -->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipBillingCycle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monthly"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_marginTop="4dp"
+                android:checkable="false"
+                app:chipMinHeight="24dp"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

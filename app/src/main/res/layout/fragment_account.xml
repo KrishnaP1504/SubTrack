@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
+
+    <!-- Top app bar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:liftOnScroll="true"
+        app:liftOnScrollTargetViewId="@id/nestedScrollView">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/account_title"
+            app:titleTextAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/screen_padding"
+            android:paddingEnd="@dimen/screen_padding"
+            android:paddingTop="@dimen/screen_padding"
+            android:paddingBottom="120dp"
+            android:clipToPadding="false">
+
+
+        <!-- ══════════════════════════════════════ -->
+        <!--           PROFILE SECTION              -->
+        <!-- ══════════════════════════════════════ -->
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="?attr/colorOutline"
+            android:layout_marginBottom="@dimen/section_spacing">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/card_padding"
+                android:gravity="center_vertical">
+
+                <!-- Avatar circle -->
+                <FrameLayout
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginEnd="16dp">
+
+                    <View
+                        android:id="@+id/viewAvatarBg"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:background="@drawable/shape_circle"
+                        android:backgroundTint="?attr/colorPrimaryContainer" />
+
+                    <TextView
+                        android:id="@+id/tvAvatarInitial"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="U"
+                        android:textColor="?attr/colorOnPrimaryContainer"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                </FrameLayout>
+
+                <!-- Name + Email column -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/account_default_name"
+                        android:textColor="?attr/colorOnSurface"
+                        style="@style/TextAppearance.Material3.TitleMedium" />
+
+                    <TextView
+                        android:id="@+id/tvUserEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/account_default_email"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        style="@style/TextAppearance.Material3.BodySmall"
+                        android:layout_marginTop="2dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ══════════════════════════════════════ -->
+        <!--         EDIT PROFILE SECTION           -->
+        <!-- ══════════════════════════════════════ -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_profile"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            style="@style/TextAppearance.Material3.LabelLarge"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Name field -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDisplayName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/display_name_hint"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_marginBottom="@dimen/field_spacing">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDisplayName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorOnSurface"
+                android:inputType="textPersonName"
+                android:imeOptions="actionDone"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Save Name Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save_name"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_marginBottom="@dimen/section_spacing" />
+
+        <!-- ══════════════════════════════════════ -->
+        <!--        PREFERENCES SECTION             -->
+        <!-- ══════════════════════════════════════ -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/preferences_section"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            style="@style/TextAppearance.Material3.LabelLarge"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Default Currency Dropdown -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDefaultCurrency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/default_currency_hint"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_marginBottom="12dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/actvDefaultCurrency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorOnSurface"
+                android:inputType="none"
+                android:hint="@string/default_currency_hint"
+                android:contentDescription="@string/default_currency_hint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Theme Selection Dropdown -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/app_theme"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_marginBottom="@dimen/section_spacing">
+
+            <AutoCompleteTextView
+                android:id="@+id/actvTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorOnSurface"
+                android:inputType="none"
+                android:hint="@string/app_theme"
+                android:contentDescription="@string/app_theme" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- ══════════════════════════════════════ -->
+        <!--          SECURITY SECTION              -->
+        <!-- ══════════════════════════════════════ -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/security_section"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            style="@style/TextAppearance.Material3.LabelLarge"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Biometric Toggle Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="?attr/colorOutline"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/card_padding"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_fingerprint"
+                    app:tint="?attr/colorPrimary"
+                    android:contentDescription="@string/biometric_lock"
+                    android:layout_marginEnd="16dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/biometric_lock"
+                        android:textColor="?attr/colorOnSurface"
+                        style="@style/TextAppearance.Material3.TitleSmall" />
+
+                    <TextView
+                        android:id="@+id/tvBiometricStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/biometric_description"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        style="@style/TextAppearance.Material3.BodySmall"
+                        android:layout_marginTop="2dp" />
+
+                </LinearLayout>
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switchBiometric"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Reset Password Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardResetPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="?attr/colorOutline"
+            android:layout_marginBottom="@dimen/section_spacing"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/card_padding"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_notification"
+                    app:tint="?attr/colorPrimary"
+                    android:contentDescription="@string/reset_password"
+                    android:layout_marginEnd="16dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reset_password"
+                        android:textColor="?attr/colorOnSurface"
+                        style="@style/TextAppearance.Material3.TitleSmall" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reset_password_desc"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        style="@style/TextAppearance.Material3.BodySmall"
+                        android:layout_marginTop="2dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ══════════════════════════════════════ -->
+        <!--            LOGOUT BUTTON               -->
+        <!-- ══════════════════════════════════════ -->
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/logout"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            app:icon="@drawable/ic_logout"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            app:strokeColor="?attr/colorError"
+            android:textColor="?attr/colorError"
+            app:iconTint="?attr/colorError"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp" />
+
+    </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

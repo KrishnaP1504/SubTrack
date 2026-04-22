@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?android:attr/colorBackground">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:liftOnScroll="true"
+        app:liftOnScrollTargetViewId="@id/nestedScrollView">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Email Sync"
+            app:navigationIcon="@drawable/ic_back" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Loading State -->
+        <LinearLayout
+            android:id="@+id/layoutLoading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+            <ProgressBar
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:indeterminate="true"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scanning your inbox..."
+                android:textColor="?attr/colorOnSurface"
+                style="@style/TextAppearance.Material3.TitleMedium" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Looking for receipts and invoices"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                style="@style/TextAppearance.Material3.BodyMedium"
+                android:layout_marginTop="8dp" />
+
+        </LinearLayout>
+
+        <!-- Results State -->
+        <LinearLayout
+            android:id="@+id/layoutResults"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="We found these subscriptions linked to your email. Select the ones you want to add."
+                android:textColor="?attr/colorOnSurfaceVariant"
+                style="@style/TextAppearance.Material3.BodyMedium"
+                android:padding="16dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDetectedSubscriptions"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="16dp"
+                android:clipToPadding="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:background="?android:attr/colorBackground"
+                android:elevation="8dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnImportSelected"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Import Selected"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "53419811448",
+    "firebase_url": "https://subtrack-4f711-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "subtrack-4f711",
+    "storage_bucket": "subtrack-4f711.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53419811448:android:ed47a28d1b55a14b9bc38d",
+        "android_client_info": {
+          "package_name": "com.example.subtrack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53419811448-8r8mrrtgp1v75lfb5183v00gpt8nt5j8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.subtrack",
+            "certificate_hash": "69489823f5e73a0fa9f800efbe70f9381a21e0ba"
+          }
+        },
+        {
+          "client_id": "53419811448-42b10lipu6ddjk42eij1itmel3na4m8i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0grALm3BrnJxxGlR9mE-5jKQ4Vy-LUjs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "53419811448-42b10lipu6ddjk42eij1itmel3na4m8i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- App -->
+    <string name="app_name">SubTrack</string>
+    <string name="login">Sign In</string>
+    <string name="sign_up">Register</string>
+
+    <!-- Navigation -->
+    <string name="dashboard">Home</string>
+    <string name="analytics">Analytics</string>
+    <string name="scan">Scan</string>
+    <string name="back">Back</string>
+
+    <!-- Dashboard -->
+    <string name="monthly_spend">Monthly spend</string>
+    <string name="upcoming_renewals">Upcoming</string>
+    <string name="next_7_days">Next 7 days</string>
+    <string name="My_subscriptions">My subscriptions</string>
+    <string name="zero_active">0 active</string>
+    <string name="no_subscriptions_yet">No subscriptions yet</string>
+    <string name="tap_plus_to_add">Tap the + button below to add your first subscription</string>
+    <string name="empty_state_icon_desc">Empty subscription list</string>
+
+    <!-- FAB -->
+    <string name="add_subscription">Add subscription</string>
+
+    <!-- Add / Edit Form -->
+    <string name="subscription_name">Service name (e.g. Netflix)</string>
+    <string name="price">Price</string>
+    <string name="currency">Currency</string>
+    <string name="billing_cycle">Billing cycle</string>
+    <string name="monthly">Monthly</string>
+    <string name="yearly">Yearly</string>
+    <string name="renewal_date">Next renewal date</string>
+    <string name="category">Category</string>
+    <string name="color_label">Color tag</string>
+    <string name="enable_reminder">Renewal reminder</string>
+    <string name="reminder_description">Notify me 24 hours before renewal</string>
+    <string name="save_subscription">Save subscription</string>
+
+    <!-- Validation errors -->
+    <string name="error_name_required">Please enter a name</string>
+    <string name="error_price_required">Please enter a price</string>
+    <string name="error_price_invalid">Enter a valid number (e.g. 14.99)</string>
+    <string name="error_date_required">Please select a renewal date</string>
+
+    <!-- Analytics -->
+    <string name="annual_burn_rate">Annual burn rate</string>
+    <string name="spend_by_category">Spending by category</string>
+    <string name="monthly_breakdown">Monthly breakdown</string>
+
+    <!-- Scanner -->
+    <string name="quick_add_scan">Quick add(scan)</string>
+    <string name="tap_to_scan">Tap to pick a receipt or email</string>
+    <string name="scan_description">Pick a screenshot of a confirmation email or billing receipt. ML Kit will detect the service name and price.</string>
+    <string name="scan_icon_desc">Scanner icon</string>
+    <string name="scanned_image_desc">Scanned receipt image</string>
+    <string name="detected_info">Detected information — review and confirm</string>
+    <string name="detected_price">Detected price</string>
+    <string name="use_this_data">Use this data →</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_id" translatable="false">subtrack_reminders</string>
+    <string name="notification_channel_name">Subscription Reminders</string>
+    <string name="notification_title">Renewal Reminder</string>
+    <string name="notification_body">%1$s renews tomorrow! Tap to review.</string>
+
+    <!-- Misc -->
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm_delete_title">Delete subscription?</string>
+    <string name="confirm_delete_message">This will also cancel the renewal reminder.</string>
+
+    <!-- Welcome Screen -->
+    <string name="welcome_title">Welcome</string>
+    <string name="welcome_subtitle">Your journey to smarter subscription tracking starts here</string>
+    <string name="welcome_feature_1">Track all your subscriptions in one place</string>
+    <string name="welcome_feature_2">Visualize spending with smart analytics</string>
+    <string name="welcome_feature_3">Scan receipts to add subscriptions instantly</string>
+    <string name="get_started">Get Started</string>
+    <string name="already_have_account">Sign in with Email</string>
+    <string name="welcome_illustration_desc">Subscription tracking illustration</string>
+    <string name="welcome_terms">By continuing, you agree to our Terms of Service and Privacy Policy</string>
+
+    <!-- Login Screen -->
+    <string name="login_title">Sign in</string>
+    <string name="login_subtitle">Welcome back! Enter your credentials to continue.</string>
+    <string name="email_hint">Email address</string>
+    <string name="password_hint">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_account">Create Account</string>
+    <string name="or_divider">OR</string>
+    <string name="forgot_password_message">Password reset is not available in offline mode.</string>
+    <string name="account_created">Account created successfully!</string>
+
+    <!-- Login Validation -->
+    <string name="error_email_required">Please enter your email</string>
+    <string name="error_email_invalid">Please enter a valid email</string>
+    <string name="error_password_required">Please enter your password</string>
+    <string name="error_password_too_short">Password must be at least 6 characters</string>
+    <string name="error_account_not_found">No account found with this email</string>
+    <string name="error_wrong_password">Incorrect password</string>
+    <string name="error_account_exists">An account with this email already exists. Try signing in.</string>
+
+    <!-- Account Screen -->
+    <string name="account">Account</string>
+    <string name="account_title">Account</string>
+    <string name="account_default_name">User</string>
+    <string name="account_default_email">Not signed in</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="display_name_hint">Display name</string>
+    <string name="save_name">Save Name</string>
+    <string name="name_saved">Name updated!</string>
+
+    <!-- Security -->
+    <string name="security_section">Security</string>
+    <string name="biometric_lock">Biometric Lock</string>
+    <string name="biometric_description">Use fingerprint or face to unlock the app</string>
+    <string name="biometric_not_available">Biometric hardware not available on this device</string>
+    <string name="biometric_hw_unavailable">Biometric hardware is currently unavailable</string>
+    <string name="biometric_not_enrolled">No biometric credentials enrolled. Set up in device settings.</string>
+    <string name="biometric_enabled_msg">Biometric lock enabled</string>
+    <string name="biometric_disabled_msg">Biometric lock disabled</string>
+    <string name="biometric_prompt_title">Unlock SubTrack</string>
+    <string name="biometric_prompt_subtitle">Verify your identity to continue</string>
+
+    <!-- Reset Password -->
+    <string name="reset_password">Reset Password</string>
+    <string name="reset_password_desc">Change your account password</string>
+    <string name="current_password_hint">Current password</string>
+    <string name="new_password_hint">New password</string>
+    <string name="confirm_password_hint">Confirm new password</string>
+    <string name="save_password">Save</string>
+    <string name="error_passwords_dont_match">Passwords don\'t match</string>
+    <string name="password_changed">Password changed successfully!</string>
+
+    <!-- Logout -->
+    <string name="logout">Log out</string>
+    <string name="logout_confirm_title">Log out?</string>
+    <string name="logout_confirm_message">You\'ll need to sign in again to access your subscriptions.</string>
+
+    <!-- Preferences -->
+    <string name="preferences_section">Preferences</string>
+    <string name="default_currency_hint">Default currency</string>
+    <string name="currency_changed">Currency changed to %1$s</string>
+    <string name="app_theme">App theme</string>
+    <string name="or_connect_using">Or connect using</string>
+    <string name="google">Google</string>
+    <string name="dont_have_account">Don\'t have an account?</string>
+    <string name="signup">Sign up</string>
+    <string name="register_subtitle">Create an account to start tracking</string>
+    <string name="already_have_account_q">Already have an account?</string>
+
+</resources>

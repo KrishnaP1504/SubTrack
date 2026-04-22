@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
+
+    <!-- Top AppBar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent"
+        app:navigationIcon="@drawable/ic_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <!-- App Icon -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvIcon"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="16dp"
+        app:cardBackgroundColor="#000000"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp">
+
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/tvIconLetter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:text="N"
+            android:textSize="64sp"
+            android:textStyle="bold"
+            android:textColor="#E50914"
+            android:gravity="center" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Netflix"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="?attr/colorOnBackground"
+        app:layout_constraintTop_toBottomOf="@id/cvIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- Bottom Rounded Sheet -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_rounded_top"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/tvName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- Description -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description :"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="This is a subscription service. Track your billing cycle and payments here."
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textSize="14sp"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="32dp" />
+
+            <!-- Details List -->
+            <!-- Month -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="24dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cycle"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textStyle="bold"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/tvCycle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="MONTHLY"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <!-- Amount -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="24dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Amount"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textStyle="bold"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/tvPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="$12.99"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <!-- Begins -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="24dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Renews"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textStyle="bold"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/tvRenews"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="8 August, 2022"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <!-- Category -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="32dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Category"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textStyle="bold"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/tvCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Entertainment"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <!-- Action Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginBottom="16dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEdit"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:text="Edit"
+                    android:textColor="?attr/colorPrimary"
+                    app:strokeColor="?attr/colorPrimary"
+                    app:strokeWidth="1dp"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_marginEnd="8dp"
+                    app:cornerRadius="8dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDelete"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:text="Cancel"
+                    android:textColor="?attr/colorOnPrimary"
+                    app:backgroundTint="?attr/colorPrimary"
+                    style="@style/Widget.Material3.Button"
+                    android:layout_marginStart="8dp"
+                    app:cornerRadius="8dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/welcomeFragment">
+
+    <!-- Welcome / Onboarding screen -->
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.example.subtrack.ui.fragment.WelcomeFragment"
+        android:label="@string/welcome_title"
+        tools:layout="@layout/fragment_welcome">
+
+        <action
+            android:id="@+id/action_welcome_to_login"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/welcomeFragment"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_welcome_to_dashboard"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/welcomeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- Login screen -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.subtrack.ui.fragment.LoginFragment"
+        android:label="@string/login_title"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_login_to_dashboard"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_login_to_register"
+            app:destination="@id/registerFragment" />
+    </fragment>
+
+    <!-- Register screen -->
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.subtrack.ui.fragment.RegisterFragment"
+        android:label="Create Account"
+        tools:layout="@layout/fragment_register">
+
+        <action
+            android:id="@+id/action_register_to_dashboard"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/registerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- Home screen -->
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.example.subtrack.ui.fragment.DashboardFragment"
+        android:label="@string/dashboard"
+        tools:layout="@layout/fragment_dashboard">
+
+        <action
+            android:id="@+id/action_dashboard_to_addEdit"
+            app:destination="@id/addEditFragment" />
+
+        <action
+            android:id="@+id/action_dashboard_to_subscriptionDetail"
+            app:destination="@id/subscriptionDetailFragment" />
+
+        <action
+            android:id="@+id/action_dashboard_to_emailSync"
+            app:destination="@id/emailSyncFragment" />
+    </fragment>
+
+    <!-- Add/Edit screen -->
+    <fragment
+        android:id="@+id/addEditFragment"
+        android:name="com.example.subtrack.ui.fragment.AddEditFragment"
+        android:label="@string/add_subscription"
+        tools:layout="@layout/fragment_add_edit">
+
+        <argument
+            android:name="subscriptionId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+
+    <!-- Subscription Detail screen -->
+    <fragment
+        android:id="@+id/subscriptionDetailFragment"
+        android:name="com.example.subtrack.ui.fragment.SubscriptionDetailFragment"
+        android:label="Subscription Details"
+        tools:layout="@layout/fragment_subscription_detail">
+
+        <argument
+            android:name="subscriptionId"
+            app:argType="string" />
+            
+        <action
+            android:id="@+id/action_subscriptionDetail_to_addEdit"
+            app:destination="@id/addEditFragment" />
+    </fragment>
+
+    <!-- Email Sync screen -->
+    <fragment
+        android:id="@+id/emailSyncFragment"
+        android:name="com.example.subtrack.ui.fragment.EmailSyncFragment"
+        android:label="Email Sync"
+        tools:layout="@layout/fragment_email_sync" />
+
+    <!-- Analytics screen -->
+    <fragment
+        android:id="@+id/analyticsFragment"
+        android:name="com.example.subtrack.ui.fragment.AnalyticsFragment"
+        android:label="@string/analytics"
+        tools:layout="@layout/fragment_analytics" />
+
+    <!-- OCR Scanner screen -->
+    <fragment
+        android:id="@+id/scannerFragment"
+        android:name="com.example.subtrack.ui.fragment.ScannerFragment"
+        android:label="@string/quick_add_scan"
+        tools:layout="@layout/fragment_scanner">
+
+        <action
+            android:id="@+id/action_scanner_to_addEdit"
+            app:destination="@id/addEditFragment" />
+    </fragment>
+
+    <!-- Account screen -->
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.subtrack.ui.fragment.AccountFragment"
+        android:label="@string/account"
+        tools:layout="@layout/fragment_account">
+
+        <action
+            android:id="@+id/action_account_to_login"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+</navigation>

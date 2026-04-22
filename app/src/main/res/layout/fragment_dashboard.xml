@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
+
+    <!-- Top app bar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:liftOnScroll="true"
+        app:liftOnScrollTargetViewId="@id/nestedScrollView">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/app_name"
+            app:titleTextAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Scrollable content area -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/screen_padding"
+            android:paddingEnd="@dimen/screen_padding"
+            android:paddingTop="@dimen/section_spacing"
+            android:paddingBottom="100dp">
+
+            <!-- ── Summary Cards Row ── -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginBottom="@dimen/section_spacing">
+
+                <!-- Monthly Spend Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    app:cardCornerRadius="@dimen/card_corner_radius"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp"
+                    android:backgroundTint="?attr/colorPrimaryContainer">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/card_padding">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/monthly_spend"
+                            style="@style/TextAppearance.Material3.LabelMedium"
+                            android:textColor="?attr/colorOnPrimaryContainer" />
+
+                        <TextView
+                            android:id="@+id/tvMonthlyTotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$0.00"
+                            style="@style/TextAppearance.Material3.HeadlineMedium"
+                            android:textColor="?attr/colorOnPrimaryContainer"
+                            android:layout_marginTop="4dp" />
+
+                        <TextView
+                            android:id="@+id/tvActiveCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/zero_active"
+                            style="@style/TextAppearance.Material3.BodySmall"
+                            android:textColor="?attr/colorOnPrimaryContainer"
+                            android:layout_marginTop="2dp" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Upcoming Renewals Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    app:cardCornerRadius="@dimen/card_corner_radius"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp"
+                    android:backgroundTint="?attr/colorSecondaryContainer">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/card_padding">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/upcoming_renewals"
+                            style="@style/TextAppearance.Material3.LabelMedium"
+                            android:textColor="?attr/colorOnSecondaryContainer" />
+
+                        <TextView
+                            android:id="@+id/tvUpcomingCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            style="@style/TextAppearance.Material3.HeadlineMedium"
+                            android:textColor="?attr/colorOnSecondaryContainer"
+                            android:layout_marginTop="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/next_7_days"
+                            style="@style/TextAppearance.Material3.BodySmall"
+                            android:textColor="?attr/colorOnSecondaryContainer"
+                            android:layout_marginTop="2dp" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <!-- ── Section header ── -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/My_subscriptions"
+                style="@style/TextAppearance.Material3.TitleMedium"
+                android:layout_marginBottom="8dp" />
+
+            <!-- ── Subscription RecyclerView ── -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSubscriptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <!-- ── Empty state (shown when list is empty) ── -->
+            <LinearLayout
+                android:id="@+id/layoutEmptyState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingTop="48dp"
+                android:paddingBottom="48dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_subscriptions"
+                    android:alpha="0.35"
+                    app:tint="?attr/colorOnSurface"
+                    android:contentDescription="@string/empty_state_icon_desc" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_subscriptions_yet"
+                    style="@style/TextAppearance.Material3.TitleMedium"
+                    android:layout_marginTop="16dp"
+                    android:alpha="0.6" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tap_plus_to_add"
+                    style="@style/TextAppearance.Material3.BodyMedium"
+                    android:layout_marginTop="8dp"
+                    android:alpha="0.4"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+            <!-- ── Trending Subscriptions Header ── -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Trending Subscriptions"
+                style="@style/TextAppearance.Material3.TitleMedium"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- ── Trending Subscriptions Horizontal List ── -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTrendingSubscriptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingEnd="@dimen/screen_padding"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Extended FAB — hides when scrolling down, shows when scrolling up -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fabAddSubscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="110dp"
+        android:text="@string/add_subscription"
+        app:icon="@drawable/ic_add" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
