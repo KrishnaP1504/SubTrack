@@ -8,7 +8,7 @@ SubTrack is a sleek, secure Android app for tracking all your recurring subscrip
 
 <br/>
 
-[![Download on Google Play](https://img.shields.io/badge/Download-Google%20Play-3DDC84?style=for-the-badge&logo=google-play&logoColor=white)](https://play.google.com/store/apps/details?id=com.example.subtrack)
+[![Download on GitHub](https://img.shields.io/badge/Download-GitHub%20Releases-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/KrishnaP1504/SubTrack/releases/tag/SubTrack)
 &nbsp;
 [![Android](https://img.shields.io/badge/Platform-Android%2011+-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com)
 &nbsp;
