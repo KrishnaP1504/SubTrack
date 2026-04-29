@@ -128,19 +128,15 @@ class ScannerFragment : Fragment() {
         val finalName = binding.etDetectedName.text.toString()
         val finalPrice = binding.etDetectedPrice.text.toString().toDoubleOrNull() ?: 0.0
 
-        // Pass as arguments to AddEditFragment using Safe Args
-        // Note: you need to add 'scannedName' and 'scannedPrice' arguments
-        // to the addEditFragment in nav_graph.xml for this to work
+        // Fix: Pass scanned values as a Bundle to AddEditFragment so the form is pre-filled.
+        // subscriptionId is null — this is a new subscription being created from a scan.
+        val bundle = android.os.Bundle().apply {
+            putString("scannedName", finalName)
+            putDouble("scannedPrice", finalPrice)
+        }
         val action = ScannerFragmentDirections
             .actionScannerToAddEdit(subscriptionId = null)
-        findNavController().navigate(action)
-
-        // Alternative if Safe Args doesn't include the extra fields:
-        // val bundle = Bundle().apply {
-        //     putString("scannedName", finalName)
-        //     putDouble("scannedPrice", finalPrice)
-        // }
-        // findNavController().navigate(R.id.action_scanner_to_addEdit, bundle)
+        findNavController().navigate(action.actionId, bundle)
     }
 
     override fun onDestroyView() {

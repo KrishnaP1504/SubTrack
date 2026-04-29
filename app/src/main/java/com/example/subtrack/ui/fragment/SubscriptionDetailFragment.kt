@@ -46,10 +46,36 @@ class SubscriptionDetailFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        // Fix: Track the current subscription in a local var so button listeners
+        // are registered only once (not re-registered on every Firestore emit).
+        var currentSubscription: com.example.subtrack.data.local.entity.Subscription? = null
+
+        binding.btnEdit.setOnClickListener {
+            currentSubscription?.let { sub ->
+                val action = SubscriptionDetailFragmentDirections.actionSubscriptionDetailToAddEdit(sub.id)
+                findNavController().navigate(action)
+            }
+        }
+
+        binding.btnDelete.setOnClickListener {
+            currentSubscription?.let { sub ->
+                AlertDialog.Builder(requireContext())
+                    .setTitle(getString(R.string.confirm_delete_title))
+                    .setMessage(getString(R.string.confirm_delete_message))
+                    .setPositiveButton(getString(R.string.delete)) { _, _ ->
+                        viewModel.deleteSubscription(sub)
+                        findNavController().navigateUp()
+                    }
+                    .setNegativeButton(getString(R.string.cancel), null)
+                    .show()
+            }
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.subscriptions.collect { subscriptions ->
                 val subscription = subscriptions.find { it.id == args.subscriptionId }
                 if (subscription != null) {
+                    currentSubscription = subscription
                     binding.tvName.text = subscription.name
 
                     // Load the real company logo
@@ -66,31 +92,10 @@ class SubscriptionDetailFragment : Fragment() {
                     )
 
                     binding.tvDescription.text = "${subscription.name} is a subscription service. Track your billing cycle and payments here to manage your expenses effectively."
-                    
                     binding.tvCycle.text = subscription.billingCycle.lowercase().replaceFirstChar { it.uppercase() }
-                    
-                    val formattedPrice = CurrencyUtils.format(subscription.price, subscription.currency)
-                    binding.tvPrice.text = formattedPrice
-                    
+                    binding.tvPrice.text = CurrencyUtils.format(subscription.price, subscription.currency)
                     binding.tvRenews.text = com.example.subtrack.util.DateUtils.formatDate(subscription.renewalDate)
                     binding.tvCategory.text = subscription.category
-
-                    binding.btnEdit.setOnClickListener {
-                        val action = SubscriptionDetailFragmentDirections.actionSubscriptionDetailToAddEdit(subscription.id)
-                        findNavController().navigate(action)
-                    }
-
-                    binding.btnDelete.setOnClickListener {
-                        AlertDialog.Builder(requireContext())
-                            .setTitle(getString(R.string.confirm_delete_title))
-                            .setMessage(getString(R.string.confirm_delete_message))
-                            .setPositiveButton(getString(R.string.delete)) { _, _ ->
-                                viewModel.deleteSubscription(subscription)
-                                findNavController().navigateUp()
-                            }
-                            .setNegativeButton(getString(R.string.cancel), null)
-                            .show()
-                    }
                 }
             }
         }

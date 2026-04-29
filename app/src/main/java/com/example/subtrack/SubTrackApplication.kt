@@ -4,15 +4,19 @@ package com.example.subtrack
 
 import android.app.Application
 import com.example.subtrack.data.repository.SubscriptionRepository
-import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
 class SubTrackApplication : Application() {
 
     // Removed Room database since we are migrating to Firebase Firestore
-    
+
+    // Fix: Use a proper application-scoped coroutine scope instead of GlobalScope.
+    // SupervisorJob ensures one failed child doesn't cancel sibling coroutines.
+    private val appScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+
     val repository: SubscriptionRepository by lazy {
         SubscriptionRepository()
     }
@@ -28,8 +32,7 @@ class SubTrackApplication : Application() {
         }
 
         // Fetch live exchange rates in the background so it's ready when needed
-        @OptIn(DelicateCoroutinesApi::class)
-        GlobalScope.launch {
+        appScope.launch {
             com.example.subtrack.util.CurrencyUtils.fetchLatestExchangeRates()
         }
     }

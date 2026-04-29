@@ -180,6 +180,16 @@ class AccountFragment : Fragment() {
                 val newPw = newPasswordInput.text.toString()
                 val confirmPw = confirmPasswordInput.text.toString()
 
+                // Fix: Validate new password before hitting Firebase
+                if (newPw.length < 6) {
+                    Snackbar.make(binding.root, getString(R.string.error_password_too_short), Snackbar.LENGTH_LONG).show()
+                    return@setPositiveButton
+                }
+                if (newPw != confirmPw) {
+                    Snackbar.make(binding.root, getString(R.string.error_passwords_dont_match), Snackbar.LENGTH_LONG).show()
+                    return@setPositiveButton
+                }
+
                 // Validate current password via Firebase re-authentication
                 val credential = com.google.firebase.auth.EmailAuthProvider.getCredential(email, currentPw)
                 user.reauthenticate(credential).addOnCompleteListener { reauthTask ->
@@ -188,7 +198,7 @@ class AccountFragment : Fragment() {
                             if (updateTask.isSuccessful) {
                                 Snackbar.make(binding.root, getString(R.string.password_changed), Snackbar.LENGTH_SHORT).show()
                             } else {
-                                Snackbar.make(binding.root, updateTask.exception?.message ?: "Failed to update password", Snackbar.LENGTH_LONG).show()
+                                Snackbar.make(binding.root, updateTask.exception?.message ?: getString(R.string.error_password_update_failed), Snackbar.LENGTH_LONG).show()
                             }
                         }
                     } else {
@@ -220,9 +230,10 @@ class AccountFragment : Fragment() {
         )
         prefs.edit()
             .remove("logged_in_email")
+            .putBoolean(WelcomeFragment.KEY_IS_LOGGED_IN, false) // Fix: clears login flag so biometric won't trigger after logout
             .apply()
 
-        // Navigate back to login, clearing the entire back stack
+        // Navigate back to welcome, clearing the entire back stack
         findNavController().navigate(R.id.action_account_to_login)
     }
 

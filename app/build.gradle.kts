@@ -39,7 +39,10 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            // Fix: Enable R8 minification and resource shrinking for release builds.
+            // This obfuscates class names, shrinks the APK, and prevents easy decompilation.
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -78,8 +81,6 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     implementation("com.github.bumptech.glide:glide:4.16.0")
-    
-        // (Room dependencies removed in favor of Firebase Firestore)
 
         // — WorkManager (background tasks) ———————————
         implementation("androidx.work:work-runtime-ktx:2.9.0")
@@ -119,6 +120,5 @@ dependencies {
         implementation("com.google.firebase:firebase-auth-ktx")
         implementation("com.google.firebase:firebase-firestore-ktx")
 
-        // — Glide (Image Loading) ———————————
-        implementation("com.github.bumptech.glide:glide:4.16.0")
+        // — Glide (Image Loading) — declared once above, no duplicate needed
 }

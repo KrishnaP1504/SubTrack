@@ -76,6 +76,16 @@ class AddEditFragment : Fragment() {
             loadExistingSubscription(args.subscriptionId!!)
         }
 
+        // Pre-fill fields if we arrived from the Scanner (scanned receipt data)
+        val scannedName = arguments?.getString("scannedName")
+        val scannedPrice = arguments?.getDouble("scannedPrice", 0.0) ?: 0.0
+        if (!scannedName.isNullOrBlank()) {
+            binding.etName.setText(scannedName)
+        }
+        if (scannedPrice > 0.0) {
+            binding.etPrice.setText(scannedPrice.toString())
+        }
+
         binding.btnSave.setOnClickListener { saveSubscription() }
     }
 
@@ -198,12 +208,21 @@ class AddEditFragment : Fragment() {
 
     // If editing an existing subscription, load its data into all the form fields
     private fun loadExistingSubscription(id: String) {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.subscriptions.collect { list ->
-                val sub = list.find { it.id == id }
-                if (sub != null && existingSubscription == null) {
-                    existingSubscription = sub
-                    populateForm(sub)
+        // StateFlow.value gives us the current list synchronously — no coroutine needed.
+        val sub = viewModel.subscriptions.value.find { it.id == id }
+        if (sub != null) {
+            existingSubscription = sub
+            populateForm(sub)
+        } else {
+            // List may still be loading; observe until we get the item
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.subscriptions.collect { list ->
+                    val found = list.find { it.id == id }
+                    if (found != null) {
+                        existingSubscription = found
+                        populateForm(found)
+                        return@collect
+                    }
                 }
             }
         }

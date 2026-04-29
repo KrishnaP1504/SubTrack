@@ -53,7 +53,7 @@ class LoginFragment : Fragment() {
 
     private fun attemptLogin() {
         val email = binding.etEmail.text.toString().trim()
-        val password = binding.etPassword.text.toString().trim()
+        val password = binding.etPassword.text.toString() // Do NOT trim passwords — spaces are valid characters
 
         if (!validateForm(email, password)) return
 
@@ -76,8 +76,11 @@ class LoginFragment : Fragment() {
         val prefs = requireContext().getSharedPreferences(
             WelcomeFragment.PREFS_NAME, Context.MODE_PRIVATE
         )
-        prefs.edit().putString("logged_in_email", email).apply()
-        
+        prefs.edit()
+            .putString("logged_in_email", email)
+            .putBoolean(WelcomeFragment.KEY_IS_LOGGED_IN, true) // Fix: enables biometric check on next launch
+            .apply()
+
         findNavController().navigate(R.id.action_login_to_dashboard)
     }
 

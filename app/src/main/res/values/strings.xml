@@ -137,6 +137,7 @@
     <string name="save_password">Save</string>
     <string name="error_passwords_dont_match">Passwords don\'t match</string>
     <string name="password_changed">Password changed successfully!</string>
+    <string name="error_password_update_failed">Failed to update password. Please try again.</string>
 
     <!-- Logout -->
     <string name="logout">Log out</string>
@@ -154,5 +155,7 @@
     <string name="signup">Sign up</string>
     <string name="register_subtitle">Create an account to start tracking</string>
     <string name="already_have_account_q">Already have an account?</string>
+    <string name="_0_00_year">$0.00 / year</string>
+    <string name="_0_00_day_on_average">$0.00 / day on average</string>
 
 </resources>

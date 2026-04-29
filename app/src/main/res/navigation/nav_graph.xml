@@ -6,7 +6,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/welcomeFragment">
 
-    <!-- Welcome / Onboarding screen -->
+    <!-- Welcome screen -->
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.example.subtrack.ui.fragment.WelcomeFragment"

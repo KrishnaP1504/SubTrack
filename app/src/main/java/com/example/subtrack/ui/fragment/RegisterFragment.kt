@@ -44,8 +44,8 @@ class RegisterFragment : Fragment() {
     private fun attemptCreateAccount() {
         val name = binding.etName.text.toString().trim()
         val email = binding.etEmail.text.toString().trim()
-        val password = binding.etPassword.text.toString().trim()
-        val confirmPassword = binding.etConfirmPassword.text.toString().trim()
+        val password = binding.etPassword.text.toString() // Do NOT trim passwords — spaces are valid characters
+        val confirmPassword = binding.etConfirmPassword.text.toString() // Do NOT trim passwords
 
         if (!validateForm(name, email, password, confirmPassword)) return
 
@@ -56,19 +56,23 @@ class RegisterFragment : Fragment() {
                 if (isAdded) binding.btnCreateAccount.isEnabled = true
                 if (task.isSuccessful) {
                     Snackbar.make(binding.root, getString(R.string.account_created), Snackbar.LENGTH_SHORT).show()
-                    loginSuccess(email)
+                    loginSuccess(email, name)
                 } else {
                     Snackbar.make(binding.root, task.exception?.message ?: "Sign up failed", Snackbar.LENGTH_LONG).show()
                 }
             }
     }
 
-    private fun loginSuccess(email: String) {
+    private fun loginSuccess(email: String, name: String) {
         val prefs = requireContext().getSharedPreferences(
             WelcomeFragment.PREFS_NAME, Context.MODE_PRIVATE
         )
-        prefs.edit().putString("logged_in_email", email).apply()
-        
+        prefs.edit()
+            .putString("logged_in_email", email)
+            .putString("user_display_name", name) // Save username so Account page shows it
+            .putBoolean(WelcomeFragment.KEY_IS_LOGGED_IN, true) // Fix: enables biometric check on next launch
+            .apply()
+
         findNavController().navigate(R.id.action_register_to_dashboard)
     }
 

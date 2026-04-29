@@ -100,14 +100,16 @@ class MainActivity : AppCompatActivity() {
 
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                 super.onAuthenticationError(errorCode, errString)
-                // If user cancels or fails, close the app
+                // If user explicitly cancels or presses negative button, close the app
                 if (errorCode == BiometricPrompt.ERROR_USER_CANCELED ||
                     errorCode == BiometricPrompt.ERROR_NEGATIVE_BUTTON ||
                     errorCode == BiometricPrompt.ERROR_CANCELED) {
                     finishAffinity()
                 } else {
-                    // For other errors, let them in (graceful fallback)
-                    binding.root.visibility = View.VISIBLE
+                    // Fix: For any other error (hardware glitch, timeout, lockout etc.)
+                    // DO NOT silently let the user in — close the app to stay secure.
+                    // Users can reopen the app and try again.
+                    finishAffinity()
                 }
             }
 

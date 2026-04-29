@@ -69,7 +69,7 @@
                     android:id="@+id/tvAnnualBurnRate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$0.00 / year"
+                    android:text="@string/_0_00_year"
                     style="@style/TextAppearance.Material3.DisplaySmall"
                     android:textColor="?attr/colorOnTertiaryContainer"
                     android:layout_marginTop="4dp" />
@@ -78,7 +78,7 @@
                     android:id="@+id/tvDailyAverage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$0.00 / day on average"
+                    android:text="@string/_0_00_day_on_average"
                     style="@style/TextAppearance.Material3.BodySmall"
                     android:textColor="?attr/colorOnTertiaryContainer"
                     android:layout_marginTop="4dp" />
