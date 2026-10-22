@@ -18,4 +18,5 @@ build/
 local.properties
 api_keys.properties
 google-services.json
+release/
 
