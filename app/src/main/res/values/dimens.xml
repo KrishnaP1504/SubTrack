@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Screen-level padding (left/right) -->
+    <dimen name="screen_padding">16dp</dimen>
+
+    <!-- Vertical gap between major sections -->
+    <dimen name="section_spacing">20dp</dimen>
+
+    <!-- Vertical gap between form fields -->
+    <dimen name="field_spacing">16dp</dimen>
+
+    <!-- Padding inside cards -->
+    <dimen name="card_padding">16dp</dimen>
+
+    <!-- Corner radius for cards -->
+    <dimen name="card_corner_radius">16dp</dimen>
+
+    <!-- Color dot size in color picker -->
+    <dimen name="color_dot_size">36dp</dimen>
+
+    <!-- Color dot margin in picker row -->
+    <dimen name="color_dot_margin">8dp</dimen>
+
+    <!-- RecyclerView item spacing -->
+    <dimen name="list_item_spacing">8dp</dimen>
+
+</resources>

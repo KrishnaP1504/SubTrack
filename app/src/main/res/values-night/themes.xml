@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Light theme override in values-night to enforce strict custom light theme throughout the app -->
+    <style name="Theme.SubTrack" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/app_primary</item>
+        <item name="colorOnPrimary">@color/app_on_primary</item>
+        <item name="colorPrimaryContainer">@color/app_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/app_on_primary_container</item>
+
+        <item name="colorSecondary">@color/app_secondary</item>
+        <item name="colorOnSecondary">@color/app_on_secondary</item>
+        <item name="colorSecondaryContainer">@color/app_secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/app_on_secondary_container</item>
+
+        <item name="colorError">@color/app_error</item>
+        <item name="colorOnError">@color/app_on_primary</item>
+        <item name="colorErrorContainer">@color/app_error_container</item>
+
+        <item name="android:windowBackground">@color/app_background</item>
+        <item name="android:colorBackground">@color/app_background</item>
+        <item name="colorOnBackground">@color/app_text_primary</item>
+
+        <item name="colorSurface">@color/app_surface</item>
+        <item name="colorOnSurface">@color/app_text_primary</item>
+        <item name="colorSurfaceVariant">@color/app_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/app_text_secondary</item>
+        <item name="colorOutline">@color/app_border</item>
+
+        <item name="android:statusBarColor">@color/app_background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/app_surface</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+        <item name="materialCardViewStyle">@style/Widget.SubTrack.Card</item>
+        <item name="materialButtonStyle">@style/Widget.SubTrack.Button</item>
+        <item name="bottomNavigationStyle">@style/Widget.SubTrack.BottomNavigationView</item>
+    </style>
+</resources>

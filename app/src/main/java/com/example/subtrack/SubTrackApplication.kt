@@ -1,0 +1,34 @@
+// SubTrackApplication.kt  (package root)
+
+package com.example.subtrack
+
+import android.app.Application
+import com.example.subtrack.data.repository.SubscriptionRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+
+class SubTrackApplication : Application() {
+
+    // Removed Room database since we are migrating to Firebase Firestore
+
+    // Fix: Use a proper application-scoped coroutine scope instead of GlobalScope.
+    // SupervisorJob ensures one failed child doesn't cancel sibling coroutines.
+    private val appScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+
+    val repository: SubscriptionRepository by lazy {
+        SubscriptionRepository()
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        // Force custom light theme throughout the entire app
+        androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO)
+
+        // Fetch live exchange rates in the background so it's ready when needed
+        appScope.launch {
+            com.example.subtrack.util.CurrencyUtils.fetchLatestExchangeRates()
+        }
+    }
+}
