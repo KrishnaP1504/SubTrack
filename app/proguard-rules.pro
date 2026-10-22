@@ -34,3 +34,8 @@
 -keep public class * extends com.bumptech.glide.module.AppGlideModule
 -keep class com.bumptech.glide.** { *; }
 -dontwarn com.bumptech.glide.**
+
+# Keep Security Crypto & Tink
+-keep class androidx.security.crypto.** { *; }
+-keep class com.google.crypto.tink.** { *; }
+-dontwarn com.google.crypto.tink.**

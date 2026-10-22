@@ -29,25 +29,34 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // Inject API keys into BuildConfig so Kotlin code can access them
-        buildConfigField("String", "CLEARBIT_API_KEY", "\"${apiKeys.getProperty("CLEARBIT_API_KEY", "")}\"")
-        buildConfigField("String", "EXCHANGE_RATE_API_KEY", "\"${apiKeys.getProperty("EXCHANGE_RATE_API_KEY", "")}\"")
-        buildConfigField("String", "GMAIL_CLIENT_ID", "\"${apiKeys.getProperty("GMAIL_CLIENT_ID", "")}\"")
-        buildConfigField("String", "LOGO_BASE_URL", "\"https://logo.clearbit.com\"")
+        // Public exchange rate endpoint used for multi-currency conversion
         buildConfigField("String", "EXCHANGE_RATE_BASE_URL", "\"https://open.er-api.com/v6/latest/USD\"")
+    }
+
+    signingConfigs {
+        create("release") {
+            val keystoreFile = rootProject.file("release.keystore")
+            if (keystoreFile.exists()) {
+                storeFile = keystoreFile
+                storePassword = System.getenv("KEYSTORE_PASSWORD") ?: ""
+                keyAlias = System.getenv("KEY_ALIAS") ?: ""
+                keyPassword = System.getenv("KEY_PASSWORD") ?: ""
+            } else {
+                // Fallback to debug signature for local testing / development
+                initWith(getByName("debug"))
+            }
+        }
     }
 
     buildTypes {
         release {
-            // Fix: Enable R8 minification and resource shrinking for release builds.
-            // This obfuscates class names, shrinks the APK, and prevents easy decompilation.
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {
@@ -114,6 +123,9 @@ dependencies {
 
         // — Biometric ———————————
         implementation("androidx.biometric:biometric:1.1.0")
+
+        // — Security & Encryption (EncryptedSharedPreferences) ———————————
+        implementation("androidx.security:security-crypto:1.1.0-alpha06")
 
         // — Coroutines ———————————
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")

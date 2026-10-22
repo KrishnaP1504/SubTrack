@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkBiometricOnLaunch() {
-        val prefs = getSharedPreferences(WelcomeFragment.PREFS_NAME, Context.MODE_PRIVATE)
+        val prefs = com.example.subtrack.util.SecurePreferences.getPrefs(this)
         val isLoggedIn = prefs.getBoolean(WelcomeFragment.KEY_IS_LOGGED_IN, false)
         val biometricEnabled = prefs.getBoolean(AccountFragment.KEY_BIOMETRIC_ENABLED, false)
 
@@ -156,6 +156,39 @@ class MainActivity : AppCompatActivity() {
 
         // Show biometric prompt
         showBiometricPrompt()
+    }
+
+    private fun getBiometricCryptoObject(): BiometricPrompt.CryptoObject? {
+        return try {
+            val keyStore = java.security.KeyStore.getInstance("AndroidKeyStore").apply { load(null) }
+            val keyAlias = "subtrack_biometric_key"
+            if (!keyStore.containsAlias(keyAlias)) {
+                val keyGenerator = javax.crypto.KeyGenerator.getInstance(
+                    android.security.keystore.KeyProperties.KEY_ALGORITHM_AES,
+                    "AndroidKeyStore"
+                )
+                val builder = android.security.keystore.KeyGenParameterSpec.Builder(
+                    keyAlias,
+                    android.security.keystore.KeyProperties.PURPOSE_ENCRYPT or
+                    android.security.keystore.KeyProperties.PURPOSE_DECRYPT
+                )
+                .setBlockModes(android.security.keystore.KeyProperties.BLOCK_MODE_CBC)
+                .setEncryptionPaddings(android.security.keystore.KeyProperties.ENCRYPTION_PADDING_PKCS7)
+                .setUserAuthenticationRequired(true)
+
+                keyGenerator.init(builder.build())
+                keyGenerator.generateKey()
+            }
+
+            val secretKey = keyStore.getKey(keyAlias, null) as javax.crypto.SecretKey
+            val cipher = javax.crypto.Cipher.getInstance(
+                "${android.security.keystore.KeyProperties.KEY_ALGORITHM_AES}/${android.security.keystore.KeyProperties.BLOCK_MODE_CBC}/${android.security.keystore.KeyProperties.ENCRYPTION_PADDING_PKCS7}"
+            )
+            cipher.init(javax.crypto.Cipher.ENCRYPT_MODE, secretKey)
+            BiometricPrompt.CryptoObject(cipher)
+        } catch (e: Exception) {
+            null
+        }
     }
 
     private fun showBiometricPrompt() {
@@ -178,9 +211,6 @@ class MainActivity : AppCompatActivity() {
                     errorCode == BiometricPrompt.ERROR_CANCELED) {
                     finishAffinity()
                 } else {
-                    // Fix: For any other error (hardware glitch, timeout, lockout etc.)
-                    // DO NOT silently let the user in — close the app to stay secure.
-                    // Users can reopen the app and try again.
                     finishAffinity()
                 }
             }
@@ -192,16 +222,26 @@ class MainActivity : AppCompatActivity() {
         }
 
         val biometricPrompt = BiometricPrompt(this, executor, callback)
+        val cryptoObject = getBiometricCryptoObject()
 
-        val promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle(getString(R.string.biometric_prompt_title))
-            .setSubtitle(getString(R.string.biometric_prompt_subtitle))
-            .setAllowedAuthenticators(
-                BiometricManager.Authenticators.BIOMETRIC_STRONG or
-                BiometricManager.Authenticators.DEVICE_CREDENTIAL
-            )
-            .build()
-
-        biometricPrompt.authenticate(promptInfo)
+        if (cryptoObject != null) {
+            val promptInfo = BiometricPrompt.PromptInfo.Builder()
+                .setTitle(getString(R.string.biometric_prompt_title))
+                .setSubtitle(getString(R.string.biometric_prompt_subtitle))
+                .setNegativeButtonText(getString(R.string.cancel))
+                .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG)
+                .build()
+            biometricPrompt.authenticate(promptInfo, cryptoObject)
+        } else {
+            val promptInfo = BiometricPrompt.PromptInfo.Builder()
+                .setTitle(getString(R.string.biometric_prompt_title))
+                .setSubtitle(getString(R.string.biometric_prompt_subtitle))
+                .setAllowedAuthenticators(
+                    BiometricManager.Authenticators.BIOMETRIC_STRONG or
+                    BiometricManager.Authenticators.DEVICE_CREDENTIAL
+                )
+                .build()
+            biometricPrompt.authenticate(promptInfo)
+        }
     }
 }

@@ -64,7 +64,7 @@ class EmailSyncFragment : Fragment() {
         setupRecyclerView()
 
         binding.btnGrantPermission.setOnClickListener {
-            requestSmsPermission.launch(Manifest.permission.READ_SMS)
+            showSmsDisclosureDialog()
         }
 
         binding.btnImportSelected.setOnClickListener {
@@ -93,6 +93,17 @@ class EmailSyncFragment : Fragment() {
         } else {
             showPermissionNeededState()
         }
+    }
+
+    private fun showSmsDisclosureDialog() {
+        androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.sms_disclosure_title))
+            .setMessage(getString(R.string.sms_disclosure_body))
+            .setPositiveButton(getString(R.string.continue_action)) { _, _ ->
+                requestSmsPermission.launch(Manifest.permission.READ_SMS)
+            }
+            .setNegativeButton(getString(R.string.not_now), null)
+            .show()
     }
 
     private fun showPermissionNeededState() {

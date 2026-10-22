@@ -188,4 +188,10 @@
     <string name="import_real_subscriptions">Add to My Subscriptions</string>
     <string name="sms_permission_needed">SMS permission is required to detect real subscription debits.</string>
     <string name="already_have_account_q">Already have an account?</string>
+
+    <!-- SMS Permission Prominent Disclosure (Google Play Policy Compliance) -->
+    <string name="sms_disclosure_title">SMS Permission Notice</string>
+    <string name="sms_disclosure_body">SubTrack uses your SMS messages locally to identify recurring subscription charges (such as Netflix, Spotify, or utility payments).\n\n• Your messages are processed entirely on your device.\n• No SMS content is ever uploaded, stored on servers, or shared with third parties.\n• Only subscription names, amounts, and renewal dates are extracted.</string>
+    <string name="continue_action">Continue</string>
+    <string name="not_now">Not Now</string>
 </resources>

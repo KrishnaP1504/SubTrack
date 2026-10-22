@@ -52,7 +52,7 @@ object CurrencyUtils {
 
     // Gets the user's preferred default currency, defaults to INR
     fun getPreferredCurrency(context: Context): String {
-        val prefs = context.getSharedPreferences("subtrack_prefs", Context.MODE_PRIVATE)
+        val prefs = SecurePreferences.getPrefs(context)
         return prefs.getString("default_currency", "INR") ?: "INR"
     }
 

@@ -32,7 +32,7 @@ class WelcomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Check if user has already seen the welcome screen
-        val prefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val prefs = com.example.subtrack.util.SecurePreferences.getPrefs(requireContext())
         val hasSeenWelcome = prefs.getBoolean(KEY_HAS_SEEN_WELCOME, false)
         val isLoggedIn = FirebaseAuth.getInstance().currentUser != null
 
@@ -157,7 +157,7 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun markWelcomeSeen() {
-        requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        com.example.subtrack.util.SecurePreferences.getPrefs(requireContext())
             .edit()
             .putBoolean(KEY_HAS_SEEN_WELCOME, true)
             .apply()

@@ -41,9 +41,7 @@ class AccountFragment : Fragment() {
     }
 
     private fun loadProfile() {
-        val prefs = requireContext().getSharedPreferences(
-            WelcomeFragment.PREFS_NAME, Context.MODE_PRIVATE
-        )
+        val prefs = com.example.subtrack.util.SecurePreferences.getPrefs(requireContext())
         val user = FirebaseAuth.getInstance().currentUser
         val phone = user?.phoneNumber ?: prefs.getString("logged_in_phone", "") ?: ""
         val name = prefs.getString("user_display_name", "") ?: ""
@@ -72,9 +70,7 @@ class AccountFragment : Fragment() {
             }
             binding.tilDisplayName.error = null
 
-            val prefs = requireContext().getSharedPreferences(
-                WelcomeFragment.PREFS_NAME, Context.MODE_PRIVATE
-            )
+            val prefs = com.example.subtrack.util.SecurePreferences.getPrefs(requireContext())
             prefs.edit().putString("user_display_name", newName).apply()
 
             // Update UI
@@ -86,9 +82,7 @@ class AccountFragment : Fragment() {
     }
 
     private fun setupBiometric() {
-        val prefs = requireContext().getSharedPreferences(
-            WelcomeFragment.PREFS_NAME, Context.MODE_PRIVATE
-        )
+        val prefs = com.example.subtrack.util.SecurePreferences.getPrefs(requireContext())
 
         val biometricManager = BiometricManager.from(requireContext())
         val canAuthenticate = biometricManager.canAuthenticate(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
@@ -116,9 +110,7 @@ class AccountFragment : Fragment() {
     }
 
     private fun setupCurrency() {
-        val prefs = requireContext().getSharedPreferences(
-            WelcomeFragment.PREFS_NAME, Context.MODE_PRIVATE
-        )
+        val prefs = com.example.subtrack.util.SecurePreferences.getPrefs(requireContext())
 
         val currencyAdapter = ArrayAdapter(
             requireContext(),
@@ -156,9 +148,7 @@ class AccountFragment : Fragment() {
 
     private fun performLogout() {
         FirebaseAuth.getInstance().signOut()
-        val prefs = requireContext().getSharedPreferences(
-            WelcomeFragment.PREFS_NAME, Context.MODE_PRIVATE
-        )
+        val prefs = com.example.subtrack.util.SecurePreferences.getPrefs(requireContext())
         prefs.edit()
             .remove("logged_in_phone")
             .remove("logged_in_email")

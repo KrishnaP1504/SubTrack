@@ -228,10 +228,8 @@ class LoginFragment : Fragment() {
 
             if (!isAdded) return@launch
 
-            // Save local session in SharedPreferences
-            val prefs = requireContext().getSharedPreferences(
-                WelcomeFragment.PREFS_NAME, Context.MODE_PRIVATE
-            )
+            // Save local session in EncryptedSharedPreferences
+            val prefs = com.example.subtrack.util.SecurePreferences.getPrefs(requireContext())
             prefs.edit()
                 .putString("logged_in_phone", phone)
                 .putString("logged_in_email", phone) // fallback for existing displays
