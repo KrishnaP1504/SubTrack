@@ -1,123 +1,127 @@
 <div align="center">
 
-# 📱 SubTrack
+# SubTrack
 
-### **Never lose track of a subscription again.**
+### Native Android Subscription Manager and Expense Tracking System
 
-SubTrack is a sleek, secure Android app for tracking all your recurring subscriptions — with smart OCR scanning, spending analytics, and multi-currency support — all backed by Firebase.
+SubTrack is a production-ready, native Android application engineered to help users track, manage, and optimize recurring subscriptions. Built with Kotlin and modern Android Jetpack architecture, SubTrack features smart on-device OCR receipt recognition, detailed expenditure analytics, dynamic multi-currency conversions, and real-time cloud synchronization backed by Firebase.
 
 <br/>
 
-[![Download on GitHub](https://img.shields.io/badge/Download-GitHub%20Releases-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/KrishnaP1504/SubTrack/releases/tag/SubTrack)
-&nbsp;
-[![Android](https://img.shields.io/badge/Platform-Android%2011+-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com)
-&nbsp;
-[![Kotlin](https://img.shields.io/badge/Built%20with-Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org)
+[![Download](https://img.shields.io/badge/Download-APK%20Release-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/KrishnaP1504/SubTrack/releases/tag/SubTrack)
+[![Platform](https://img.shields.io/badge/Platform-Android%2011+%20(API%2030+)-3DDC84?style=flat-square&logo=android&logoColor=white)](https://developer.android.com)
+[![Kotlin](https://img.shields.io/badge/Language-Kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=white)](https://kotlinlang.org)
+[![Architecture](https://img.shields.io/badge/Architecture-MVVM-007ACC?style=flat-square)](https://developer.android.com/topic/architecture)
+[![Backend](https://img.shields.io/badge/Backend-Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black)](https://firebase.google.com)
+[![License](https://img.shields.io/badge/License-MIT-2ea44f?style=flat-square)](LICENSE)
 
 </div>
 
 ---
 
-## ✨ Features
+## Key Features
 
-| Feature | Description |
-|---|---|
-| 📋 **Dashboard** | View all active subscriptions at a glance with their logos, costs, and renewal dates |
-| 📸 **OCR Scanner** | Snap or upload a receipt image — ML Kit auto-detects the service name & price |
-| 📊 **Analytics** | Pie & bar charts showing monthly spend by category, annual burn rate & daily average |
-| 🌍 **Multi-Currency** | Live exchange rate conversion — pick any currency as your default |
-| 🔐 **Biometric Lock** | Fingerprint / face unlock keeps your financial data private |
-| 🔥 **Firebase Sync** | Authentication & Firestore cloud backup so your data is safe across devices |
-| 🎨 **Dark / Light Theme** | Full Material Design 3 theming with system-default, light, and dark modes |
-| 🔔 **Renewal Reminders** | WorkManager background jobs fire timely notifications before a subscription renews |
-| 🏢 **Auto Logos** | Company logos fetched automatically via Clearbit Logo API using Glide |
-| 🔒 **Password Reset** | In-app Firebase re-authentication password change flow |
+- **Centralized Dashboard**: Real-time overview of active subscriptions displaying merchant logos, billing cycles, monthly outflows, and renewal countdowns.
+- **Smart OCR Scanner**: On-device text recognition powered by Google ML Kit. Snap or upload a receipt to automatically parse the merchant name, renewal date, and billing amount.
+- **Spending Analytics & Insights**: Interactive pie and bar charts powered by MPAndroidChart showcasing category-wise expenditure, annual burn rate, and daily averages.
+- **Multi-Currency Engine**: Automated exchange rate conversions powered by the Open Exchange Rates API, enabling users to track international services in their preferred base currency.
+- **Proactive Renewal Reminders**: Android WorkManager background jobs schedule automated reminder notifications 24 hours prior to billing events, resilient across device reboots via `BOOT_COMPLETED` receivers.
+- **Biometric Security**: Hardware-backed biometric authentication (fingerprint and face recognition) using AndroidX BiometricPrompt to safeguard financial records.
+- **Real-Time Cloud Synchronization**: Offline-first Room database synchronized seamlessly with Cloud Firestore using Kotlin `callbackFlow` real-time listeners.
+- **Material Design 3 Theming**: Complete Material 3 UI design supporting system-default, light, and dark modes.
+- **Automatic Merchant Branding**: Instant company logo retrieval via the Clearbit Logo API paired with Glide for high-performance image caching.
 
 ---
 
-## 📲 Download
+## Architecture and Design
 
-<a href="https://github.com/KrishnaP1504/SubTrack/releases/tag/SubTrack">
-  <img alt="Download on GitHub Releases" src="https://img.shields.io/badge/⬇%20Download%20APK-GitHub%20Releases-181717?style=for-the-badge&logo=github&logoColor=white"/>
-</a>
+SubTrack follows the recommended Android Architecture Guidelines with a strict unidirectional data flow and clean separation of concerns:
 
-> **Minimum Android version:** Android 11 (API 30)
-
----
-
-## 🛠️ Tech Stack
-
-```
-Language        Kotlin
-UI Framework    XML Layouts + ViewBinding + Material Design 3
-Navigation      Jetpack Navigation Component (SafeArgs)
-Architecture    MVVM — ViewModel + LiveData + StateFlow
-Database        Room (local) + Cloud Firestore (remote)
-Auth            Firebase Authentication
-Charts          MPAndroidChart (Pie & Bar)
-OCR             Google ML Kit Text Recognition
-Images          Glide + Clearbit Logo API
-Background      WorkManager (renewal notifications)
-Security        AndroidX Biometric API
-Currency        Open Exchange Rates API
-```
+- **UI Layer**: Fragment-based navigation coordinated by the Single Activity architecture (`MainActivity`) with ViewBinding and Jetpack Navigation Component (SafeArgs).
+- **Presentation Layer**: Android Jetpack `ViewModel` instances maintaining UI state and exposing reactive streams via `StateFlow` and `LiveData`.
+- **Domain & Repository Layer**: Unified repository arbitrating between local data caching and remote cloud sync.
+- **Local Persistence**: Room SQLite database providing immediate offline responsiveness.
+- **Remote Backend**: Firebase Authentication managing identity and Cloud Firestore providing cloud backup and cross-device sync.
+- **Background Tasks**: Android `WorkManager` scheduling non-deferrable background reminder workers.
 
 ---
 
-## 🏗️ Project Structure
+## Tech Stack
+
+| Layer | Technology |
+|:---|:---|
+| **Programming Language** | Kotlin |
+| **UI Framework** | XML Layouts, ViewBinding, Material Design 3 |
+| **Architecture Pattern** | MVVM (Model-View-ViewModel) |
+| **Concurrency & Async** | Kotlin Coroutines, StateFlow, callbackFlow, LiveData |
+| **Local Database** | Room (SQLite ORM) |
+| **Cloud Backend** | Firebase Authentication, Cloud Firestore |
+| **Background Scheduling** | Android WorkManager |
+| **Machine Learning / OCR**| Google ML Kit Text Recognition |
+| **Visualizations** | MPAndroidChart (Pie and Bar Charts) |
+| **Image Loading** | Glide + Clearbit Logo API |
+| **Security & Auth** | AndroidX BiometricPrompt, Secure SharedPreferences |
+| **Currency API** | Open Exchange Rates API |
+
+---
+
+## Project Structure
 
 ```
 app/src/main/java/com/example/subtrack/
-├── MainActivity.kt               # Single-activity host with biometric gate
-├── SubTrackApplication.kt        # Application class — initialises Room DB & repo
+├── MainActivity.kt               # Single-activity host with biometric authentication
+├── SubTrackApplication.kt        # Application class initialising Room DB and repository
 │
 ├── data/
 │   ├── local/
-│   │   ├── entity/               # Room entities (Subscription)
-│   │   └── dao/                  # Room DAOs
-│   └── repository/               # Repository layer (local ↔ Firestore sync)
+│   │   ├── entity/               # Room database entities (Subscription)
+│   │   └── dao/                  # Room Data Access Objects
+│   └── repository/               # Repository layer coordinating Room and Firestore
 │
 ├── ui/
 │   ├── fragment/
-│   │   ├── WelcomeFragment.kt    # Onboarding / splash
-│   │   ├── LoginFragment.kt      # Email + password sign-in
-│   │   ├── RegisterFragment.kt   # Account creation
-│   │   ├── DashboardFragment.kt  # Subscription list
-│   │   ├── AddEditFragment.kt    # Add / edit a subscription
-│   │   ├── SubscriptionDetailFragment.kt
-│   │   ├── ScannerFragment.kt    # OCR receipt scanner
-│   │   ├── AnalyticsFragment.kt  # Charts & spend summary
-│   │   ├── AccountFragment.kt    # Profile, theme, currency, biometric
-│   │   └── EmailSyncFragment.kt  # Email-based sync helper
+│   │   ├── WelcomeFragment.kt    # Onboarding and splash screen
+│   │   ├── LoginFragment.kt      # Firebase email and password sign-in
+│   │   ├── RegisterFragment.kt   # Account registration flow
+│   │   ├── DashboardFragment.kt  # Main subscription feed and stats
+│   │   ├── AddEditFragment.kt    # Subscription entry and editing form
+│   │   ├── SubscriptionDetailFragment.kt # Detailed subscription drill-down
+│   │   ├── ScannerFragment.kt    # OCR camera and gallery receipt scanner
+│   │   ├── AnalyticsFragment.kt  # Spending breakdown and charts
+│   │   ├── AccountFragment.kt    # User profile, theme, and security settings
+│   │   └── EmailSyncFragment.kt  # Invoice and subscription import helper
 │   ├── adapter/                  # RecyclerView adapters
-│   ├── viewmodel/                # ViewModels per screen
-│   └── theme/                    # Material theme helpers
+│   ├── viewmodel/                # Architecture ViewModels per screen
+│   └── theme/                    # Material 3 styling and color utilities
 │
 ├── util/
-│   └── CurrencyUtils.kt          # Currency conversion & formatting
+│   └── CurrencyUtils.kt          # Exchange rate calculations and formatting
 │
 └── worker/
-    └── RenewalReminderWorker.kt  # WorkManager background reminder job
+    └── RenewalReminderWorker.kt  # WorkManager notification scheduling worker
 ```
 
 ---
 
-## 🚀 Getting Started (Local Build)
+## Getting Started
 
 ### Prerequisites
-- Android Studio Hedgehog or newer
-- JDK 11+
-- A Firebase project with **Authentication** and **Firestore** enabled
 
-### 1. Clone the repository
+- Android Studio (Hedgehog 2023.1.1 or newer recommended)
+- Java Development Kit (JDK 11 or JDK 17)
+- Android SDK with Platform 34 (Minimum SDK: API 30 / Android 11)
+- A Firebase project with **Authentication** and **Cloud Firestore** activated
+
+### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/KrishnaP1504/SubTrack.git
 cd SubTrack
 ```
 
-### 2. Configure API keys
+### 2. Configure API Keys
 
-Create a file called `api_keys.properties` in the **root** of the project (it is git-ignored):
+Create a file named `api_keys.properties` in the root project directory:
 
 ```properties
 CLEARBIT_API_KEY=your_clearbit_api_key
@@ -125,54 +129,53 @@ EXCHANGE_RATE_API_KEY=your_exchange_rate_api_key
 GMAIL_CLIENT_ID=your_gmail_oauth_client_id
 ```
 
-### 3. Add Firebase config
+### 3. Add Firebase Configuration
 
-Place your `google-services.json` file in the `app/` directory.  
-*(Download it from the Firebase Console → Project Settings → Your Apps)*
+1. In the [Firebase Console](https://console.firebase.google.com/), register your Android application with package name `com.example.subtrack`.
+2. Download the resulting `google-services.json` file.
+3. Place `google-services.json` inside the `app/` directory (`app/google-services.json`).
 
-### 4. Build & run
+### 4. Build and Run
+
+Assemble the debug APK via Gradle:
 
 ```bash
 ./gradlew assembleDebug
 ```
 
-Or simply press **Run ▶** in Android Studio.
+Alternatively, open the project in Android Studio and run the `app` configuration on an emulator or physical device.
 
 ---
 
-## 📸 Screenshots
+## Security Architecture
 
-> *(Coming soon)*
-
----
-
-## 🔐 Security Notes
-
-- API keys are stored in `api_keys.properties` (excluded from version control via `.gitignore`)
-- Firebase re-authentication is required before changing passwords
-- Biometric lock covers the entire app on launch — failed attempts close the app
-- Release builds have R8 minification + resource shrinking enabled
+- **Credential Isolation**: All sensitive external API credentials reside in `api_keys.properties`, excluded from source control.
+- **Biometric Gate**: Biometric challenge protects the activity lifecycle on app launch, terminating the task on unauthorized access.
+- **Cloud Security**: Cloud Firestore security rules restrict read and write access strictly to authenticated users matching document UIDs.
+- **Release Hardening**: Release builds enforce R8 code obfuscation, dead code stripping, and resource shrinking.
 
 ---
 
-## 🤝 Contributing
+## Download
 
-Pull requests are welcome! Please open an issue first to discuss what you would like to change.
+Pre-built production binaries are published under the repository releases:
 
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+- [Download SubTrack APK](https://github.com/KrishnaP1504/SubTrack/releases/tag/SubTrack)
 
 ---
 
-## 📄 License
+## Author
 
-Distributed under the MIT License. See `LICENSE` for more information.
+**Krishnakumar Pipaliya**  
+Mobile Application Developer specializing in Android (Kotlin) and Flutter
+
+- Portfolio: [krishnapipaliya.in](https://krishnapipaliya.in)
+- LinkedIn: [linkedin.com/in/krishn-pipaliya1504](https://www.linkedin.com/in/krishn-pipaliya1504/)
+- GitHub: [github.com/KrishnaP1504](https://github.com/KrishnaP1504)
+- Email: [pipaliyakrishna1504@gmail.com](mailto:pipaliyakrishna1504@gmail.com)
 
 ---
 
-<div align="center">
-Made with ❤️ by <a href="https://github.com/KrishnaP1504">Krishna Pipaliya</a>
-</div>
+## License
+
+Distributed under the MIT License. See [LICENSE](LICENSE) for full details.
